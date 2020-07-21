@@ -81,6 +81,8 @@ def randomForests():
 
 
 if __name__ == "__main__":
+    print("SVM")
     svm()
 
+    print("Random Forest Classification")
     randomForests()
