@@ -2,6 +2,8 @@ import numpy as np
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import SVC
 from sklearn.model_selection import cross_val_score
+from sklearn.naive_bayes import GaussianNB
+
 
 def testset_set():
     A_test = np.load('npz/API_A_test.npz')
@@ -42,49 +44,54 @@ def trainset_set():
     B_Y_train = np.array(B_Y)
     return A_X_train, A_Y_train, B_X_train, B_Y_train
 
-def svm():
+def learning(func):
     A_X_train, A_Y_train, B_X_train, B_Y_train = trainset_set()
 
+    A_clf, B_clf = func(A_X_train, A_Y_train, B_X_train, B_Y_train)
+
+    A_X_test, A_Y_test, B_X_test, B_Y_test = testset_set()
+
+    A_scores = cross_val_score(A_clf, A_X_test, A_Y_test, cv=5)
+    B_scores = cross_val_score(B_clf, B_X_test, B_Y_test, cv=5)
+
+    print("A: {}".format(A_scores))
+    print("B: {}".format(B_scores))
+    print("mean A: {}, B: {}".format(np.mean(A_scores), np.mean(B_scores)))
+
+
+def svm(A_X_train, A_Y_train, B_X_train, B_Y_train):
     A_clf = SVC()
     A_clf.fit(A_X_train, A_Y_train)
 
     B_clf = SVC()
     B_clf.fit(B_X_train, B_Y_train)
 
-    A_X_test, A_Y_test, B_X_test, B_Y_test = testset_set()
+    return A_clf, B_clf
 
-    A_scores = cross_val_score(A_clf, A_X_test, A_Y_test, cv=5)
-    B_scores = cross_val_score(B_clf, B_X_test, B_Y_test, cv=5)
-
-    print("A: {}".format(A_scores))
-    print("B: {}".format(B_scores))
-    print("mean A: {}, B: {}".format(np.mean(A_scores), np.mean(B_scores)))
-
-
-def randomForests():
-    A_X_train, A_Y_train, B_X_train, B_Y_train = trainset_set()
-
+def randomForests(A_X_train, A_Y_train, B_X_train, B_Y_train):
     A_clf = RandomForestClassifier(n_estimators=100, criterion="entropy")
     A_clf = A_clf.fit(A_X_train, A_Y_train)
     B_clf = RandomForestClassifier(n_estimators=100, criterion="entropy")
     B_clf = B_clf.fit(B_X_train, B_Y_train)
 
-    A_X_test, A_Y_test, B_X_test, B_Y_test = testset_set()
+    return A_clf, B_clf
 
-    A_scores = cross_val_score(A_clf, A_X_test, A_Y_test, cv=5)
-    B_scores = cross_val_score(B_clf, B_X_test, B_Y_test, cv=5)
+def NaiveBayesClassifier(A_X_train, A_Y_train, B_X_train, B_Y_train):
+    A_clf = GaussianNB()
+    A_clf = A_clf.fit(A_X_train, A_Y_train)
+    B_clf = GaussianNB()
+    B_clf = B_clf.fit(B_X_train, B_Y_train)
 
-    print("A: {}".format(A_scores))
-    print("B: {}".format(B_scores))
-    print("mean A: {}, B: {}".format(np.mean(A_scores), np.mean(B_scores)))
+    return A_clf, B_clf
 
-
-def NaiveBayesClassifier():
+def GradientBoost():
     pass
+
 
 if __name__ == "__main__":
     print("SVM")
-    svm()
-
+    learning(svm)
     print("Random Forest Classification")
-    randomForests()
+    learning(randomForests)
+    print("Naive Bayes Classification")
+    learning(NaiveBayesClassifier)
