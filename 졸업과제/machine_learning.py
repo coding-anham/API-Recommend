@@ -1,8 +1,9 @@
 import numpy as np
-from sklearn.ensemble import RandomForestClassifier, BaggingClassifier
+from sklearn.ensemble import RandomForestClassifier, BaggingClassifier, GradientBoostingClassifier
 from sklearn.svm import SVC, LinearSVC
 from sklearn.model_selection import cross_val_score
 from sklearn.naive_bayes import GaussianNB
+
 
 def testset_set():
     A_test = np.load('npz/API_A_test.npz')
@@ -83,8 +84,13 @@ def NaiveBayesClassifier(A_X_train, A_Y_train, B_X_train, B_Y_train):
 
     return A_clf, B_clf
 
-def GradientBoost():
-    pass
+def GradientBoost(A_X_train, A_Y_train, B_X_train, B_Y_train):
+    A_clf = GradientBoostingClassifier(random_state=0)
+    A_clf = A_clf.fit(A_X_train, A_Y_train)
+    B_clf = GradientBoostingClassifier(random_state=0)
+    B_clf = B_clf.fit(B_X_train, B_Y_train)
+
+    return A_clf, B_clf
 
 def BaggingLinearsvmClassifier(A_X_train, A_Y_train, B_X_train, B_Y_train):
     estimator = LinearSVC()
@@ -104,3 +110,5 @@ if __name__ == "__main__":
     learning(NaiveBayesClassifier)
     print("Bagging Linear svm Classification")
     learning(BaggingLinearsvmClassifier)
+    print("Gradient Boosting Classification")
+    learning(GradientBoost)
