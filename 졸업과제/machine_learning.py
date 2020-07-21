@@ -3,7 +3,7 @@ from sklearn.ensemble import RandomForestClassifier, BaggingClassifier, Gradient
 from sklearn.svm import SVC, LinearSVC
 from sklearn.model_selection import cross_val_score
 from sklearn.naive_bayes import GaussianNB
-
+from sklearn.neighbors import KNeighborsClassifier
 
 def testset_set():
     A_test = np.load('npz/API_A_test.npz')
@@ -101,6 +101,15 @@ def BaggingLinearsvmClassifier(A_X_train, A_Y_train, B_X_train, B_Y_train):
 
     return A_clf, B_clf
 
+def BaggingKNeighborsClassifier(A_X_train, A_Y_train, B_X_train, B_Y_train):
+    estimator = KNeighborsClassifier()
+    A_clf = BaggingClassifier(base_estimator=estimator, n_estimators=10, max_samples=1./10, n_jobs=1)
+    A_clf = A_clf.fit(A_X_train, A_Y_train)
+    B_clf = BaggingClassifier(base_estimator=estimator, n_estimators=10, max_samples=1./10, n_jobs=1)
+    B_clf = B_clf.fit(B_X_train, B_Y_train)
+
+    return A_clf, B_clf
+
 if __name__ == "__main__":
     print("SVM")
     learning(svm)
@@ -110,5 +119,7 @@ if __name__ == "__main__":
     learning(NaiveBayesClassifier)
     print("Bagging Linear svm Classification")
     learning(BaggingLinearsvmClassifier)
+    print("Bagging KNeighbors Classifier")
+    learning(BaggingKNeighborsClassifier)
     print("Gradient Boosting Classification")
     learning(GradientBoost)
