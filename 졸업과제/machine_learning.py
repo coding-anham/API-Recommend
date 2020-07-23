@@ -53,20 +53,26 @@ def learning(func):
 
     A_X_test, A_Y_test, B_X_test, B_Y_test = testset_set()
 
-    A_scores = cross_val_score(A_clf, A_X_test, A_Y_test, cv=10)
-    B_scores = cross_val_score(B_clf, B_X_test, B_Y_test, cv=10)
+    AA_scores = cross_val_score(A_clf, A_X_test, A_Y_test, cv=10)
+    AB_scores = cross_val_score(A_clf, B_X_test, B_Y_test, cv=10)
+    BB_scores = cross_val_score(B_clf, B_X_test, B_Y_test, cv=10)
+    BA_scores = cross_val_score(B_clf, A_X_test, A_Y_test, cv=10)
 
-    print("A: {}".format(A_scores))
-    print("B: {}".format(B_scores))
-    print("mean A: {}, B: {}".format(np.mean(A_scores), np.mean(B_scores)))
+    print("AA: {}".format(AA_scores))
+    print("AB: {}".format(AB_scores))
+    print("BB: {}".format(BB_scores))
+    print("BA: {}".format(BA_scores))
+    print("mean AA: {}, AB: {}, BB: {}, BA: {}".format(np.mean(AA_scores), np.mean(AB_scores),np.mean(BB_scores),np.mean(BA_scores)))
 
+    #saveClf(func,A_clf,B_clf)
+
+
+def saveClf(func, A_clf, B_clf):
     label = func.__name__
     filename_A = PIC_PATH[label]["A"]
     filename_B = PIC_PATH[label]["B"]
     pickle.dump(A_clf, open(filename_A, 'wb'))
     pickle.dump(B_clf, open(filename_B, 'wb'))
-
-
 
 def svm(A_X_train, A_Y_train, B_X_train, B_Y_train):
     A_clf = SVC()
@@ -150,7 +156,6 @@ if __name__ == "__main__":
 
     print("Random Forest Classification")
     learning(randomForests)
-
     print("SVM")
     learning(svm)
     print("Naive Bayes Classification")
@@ -165,5 +170,3 @@ if __name__ == "__main__":
     learning(BaggingRandomForestClassifier)
     print("Voting")
     learning(Voting)
-
-    #test pushing
