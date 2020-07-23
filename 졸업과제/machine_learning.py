@@ -1,9 +1,11 @@
 import numpy as np
+import pickle
 from sklearn.ensemble import RandomForestClassifier, BaggingClassifier, GradientBoostingClassifier, VotingClassifier
 from sklearn.svm import SVC, LinearSVC
 from sklearn.model_selection import cross_val_score
 from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
+from hyperparams import *
 
 def testset_set():
     A_test = np.load('npz/API_A_test.npz')
@@ -51,12 +53,19 @@ def learning(func):
 
     A_X_test, A_Y_test, B_X_test, B_Y_test = testset_set()
 
-    A_scores = cross_val_score(A_clf, A_X_test, A_Y_test, cv=5)
-    B_scores = cross_val_score(B_clf, B_X_test, B_Y_test, cv=5)
+    A_scores = cross_val_score(A_clf, A_X_test, A_Y_test, cv=10)
+    B_scores = cross_val_score(B_clf, B_X_test, B_Y_test, cv=10)
 
     print("A: {}".format(A_scores))
     print("B: {}".format(B_scores))
     print("mean A: {}, B: {}".format(np.mean(A_scores), np.mean(B_scores)))
+
+    label = func.__name__
+    filename_A = PIC_PATH[label]["A"]
+    filename_B = PIC_PATH[label]["B"]
+    pickle.dump(A_clf, open(filename_A, 'wb'))
+    pickle.dump(B_clf, open(filename_B, 'wb'))
+
 
 
 def svm(A_X_train, A_Y_train, B_X_train, B_Y_train):
@@ -138,19 +147,21 @@ def Voting(A_X_train, A_Y_train, B_X_train, B_Y_train):
     return A_clf, B_clf
 
 if __name__ == "__main__":
-    """
+
     print("Random Forest Classification")
     learning(randomForests)
+
+    """
     print("SVM")
     learning(svm)
     print("Naive Bayes Classification")
     learning(NaiveBayesClassifier)
     print("Bagging Linear svm Classification")
-    learning(BaggingLinearsvmClassifier)"""
+    learning(BaggingLinearsvmClassifier)
     print("Bagging KNeighbors Classifier")
     learning(BaggingKNeighborsClassifier)
-    #print("Gradient Boosting Classification")
-    #learning(GradientBoost)
+    print("Gradient Boosting Classification")
+    learning(GradientBoost)
 
-    """print("BaggingRandomForestClassifier")
-    learning(BaggingRandomForestClassifier)
+    print("BaggingRandomForestClassifier")
+    learning(BaggingRandomForestClassifier)"""
