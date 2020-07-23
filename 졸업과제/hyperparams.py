@@ -2,7 +2,7 @@
 BASE_PATH = "data/"
 SEQ_PATH = BASE_PATH + "sequence/"
 STR_PATH = BASE_PATH + "structure/"
-CLF_PATH = BASE_PATH+"clf/"
+CLF_PATH = "clf/"
 NPZ_PATH = {
     "NPInter" : "npz/NPInter.npz",
     "RPI" : {
