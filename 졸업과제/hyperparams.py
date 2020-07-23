@@ -2,6 +2,7 @@
 BASE_PATH = "data/"
 SEQ_PATH = BASE_PATH + "sequence/"
 STR_PATH = BASE_PATH + "structure/"
+CLF_PATH = BASE_PATH+"clf/"
 NPZ_PATH = {
     "NPInter" : "npz/NPInter.npz",
     "RPI" : {
@@ -34,6 +35,7 @@ PAIRS_PATH = {
         "B_test"    : BASE_PATH + "benchmark_B_test_sequences.csv"
     }
 }
+
 SEQ_PATH = {
     "NPInter" : {
         "RNA"     : SEQ_PATH + "NPinter_rna_seq.fa",
@@ -56,5 +58,12 @@ SEQ_PATH = {
             "RNA"     : SEQ_PATH + "RPI488_rna_seq.fa",
             "Protein" : SEQ_PATH + "RPI488_protein_seq.fa"
         }
+    }
+}
+
+PIC_PATH = {
+    "randomForests": {
+        "A": CLF_PATH + "randomForests_A.pickle",
+        "B": CLF_PATH + "randomForests_B.pickle"
     }
 }
