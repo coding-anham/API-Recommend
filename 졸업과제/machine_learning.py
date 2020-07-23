@@ -1,5 +1,5 @@
 import numpy as np
-from sklearn.ensemble import RandomForestClassifier, BaggingClassifier, GradientBoostingClassifier
+from sklearn.ensemble import RandomForestClassifier, BaggingClassifier, GradientBoostingClassifier, VotingClassifier
 from sklearn.svm import SVC, LinearSVC
 from sklearn.model_selection import cross_val_score
 from sklearn.naive_bayes import GaussianNB
@@ -69,9 +69,9 @@ def svm(A_X_train, A_Y_train, B_X_train, B_Y_train):
     return A_clf, B_clf
 
 def randomForests(A_X_train, A_Y_train, B_X_train, B_Y_train):
-    A_clf = RandomForestClassifier(n_estimators=100, criterion="entropy")
+    A_clf = RandomForestClassifier(n_estimators=100, criterion="entropy", max_depth=None, min_samples_split=2, random_state=0)
     A_clf = A_clf.fit(A_X_train, A_Y_train)
-    B_clf = RandomForestClassifier(n_estimators=100, criterion="entropy")
+    B_clf = RandomForestClassifier(n_estimators=100, criterion="entropy", max_depth=None, min_samples_split=2, random_state=0)
     B_clf = B_clf.fit(B_X_train, B_Y_train)
 
     return A_clf, B_clf
@@ -94,27 +94,46 @@ def GradientBoost(A_X_train, A_Y_train, B_X_train, B_Y_train):
 
 def BaggingLinearsvmClassifier(A_X_train, A_Y_train, B_X_train, B_Y_train):
     estimator = LinearSVC()
-    A_clf = BaggingClassifier(base_estimator=estimator, n_estimators=10, max_samples=1./10, n_jobs=1)
+    A_clf = BaggingClassifier(base_estimator=estimator, n_estimators=100, max_samples=1./10, n_jobs=1)
     A_clf = A_clf.fit(A_X_train, A_Y_train)
-    B_clf = BaggingClassifier(base_estimator=estimator, n_estimators=10, max_samples=1./10, n_jobs=1)
+    B_clf = BaggingClassifier(base_estimator=estimator, n_estimators=100, max_samples=1./10, n_jobs=1)
     B_clf = B_clf.fit(B_X_train, B_Y_train)
 
     return A_clf, B_clf
 
 def BaggingKNeighborsClassifier(A_X_train, A_Y_train, B_X_train, B_Y_train):
     estimator = KNeighborsClassifier()
-    A_clf = BaggingClassifier(base_estimator=estimator, n_estimators=10, max_samples=1./10, n_jobs=1)
+    A_clf = BaggingClassifier(base_estimator=estimator, n_estimators=100, max_samples=1./10, n_jobs=1)
     A_clf = A_clf.fit(A_X_train, A_Y_train)
-    B_clf = BaggingClassifier(base_estimator=estimator, n_estimators=10, max_samples=1./10, n_jobs=1)
+    B_clf = BaggingClassifier(base_estimator=estimator, n_estimators=100, max_samples=1./10, n_jobs=1)
+    B_clf = B_clf.fit(B_X_train, B_Y_train)
+
+    return A_clf, B_clf
+
+def Voting(A_X_train, A_Y_train, B_X_train, B_Y_train):
+    estimator_1 = LinearSVC()
+    estimator_2 = KNeighborsClassifier()
+
+    SVM = SVC()
+    RFC = RandomForestClassifier(n_estimators=100, criterion="entropy", max_depth=None, min_samples_split=2, random_state=0)
+    NBC = GaussianNB()
+    GBC = GradientBoostingClassifier(random_state=0)
+    BLS = BaggingClassifier(base_estimator=estimator_1, n_estimators=100, max_samples=1./10, n_jobs=1)
+    BKN = BaggingClassifier(base_estimator=estimator_2, n_estimators=100, max_samples=1./10, n_jobs=1)
+
+    A_clf = VotingClassifier(estimators=[('svm', SVM), ('rfc', RFC), ('nbc', NBC), ('gbc', GBC)], voting='hard')
+    A_clf = A_clf.fit(A_X_train, A_Y_train)
+    B_clf = VotingClassifier(estimators=[('svm', SVM), ('rfc', RFC), ('nbc', NBC), ('gbc', GBC)], voting='hard')
     B_clf = B_clf.fit(B_X_train, B_Y_train)
 
     return A_clf, B_clf
 
 if __name__ == "__main__":
-    print("SVM")
-    learning(svm)
+    """
     print("Random Forest Classification")
     learning(randomForests)
+    print("SVM")
+    learning(svm)
     print("Naive Bayes Classification")
     learning(NaiveBayesClassifier)
     print("Bagging Linear svm Classification")
@@ -123,3 +142,7 @@ if __name__ == "__main__":
     learning(BaggingKNeighborsClassifier)
     print("Gradient Boosting Classification")
     learning(GradientBoost)
+    """
+
+    print("Voting")
+    learning(Voting)
