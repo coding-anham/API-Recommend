@@ -65,5 +65,33 @@ PIC_PATH = {
     "randomForests": {
         "A": CLF_PATH + "randomForests_A.pickle",
         "B": CLF_PATH + "randomForests_B.pickle"
+    },
+    "svm": {
+        "A": CLF_PATH + "svm_A.pickle",
+        "B": CLF_PATH + "svm_B.pickle"
+    },
+    "NaiveBayesClassifier": {
+        "A": CLF_PATH + "NaiveBayesClassifier_A.pickle",
+        "B": CLF_PATH + "NaiveBayesClassifier_B.pickle"
+    },
+    "BaggingLinearsvmClassifier": {
+        "A": CLF_PATH + "BaggingLinearsvmClassifier_A.pickle",
+        "B": CLF_PATH + "BaggingLinearsvmClassifier_B.pickle"
+    },
+    "BaggingKNeighborsClassifier": {
+        "A": CLF_PATH + "BaggingKNeighborsClassifier_A.pickle",
+        "B": CLF_PATH + "BaggingKNeighborsClassifier_B.pickle"
+    },
+    "GradientBoost": {
+        "A": CLF_PATH + "GradientBoost_A.pickle",
+        "B": CLF_PATH + "GradientBoost_B.pickle"
+    },
+    "BaggingRandomForestClassifier": {
+        "A": CLF_PATH + "BaggingRandomForestClassifier_A.pickle",
+        "B": CLF_PATH + "BaggingRandomForestClassifier_B.pickle"
+    },
+    "Voting": {
+        "A": CLF_PATH + "Voting_A.pickle",
+        "B": CLF_PATH + "Voting_B.pickle"
     }
 }
