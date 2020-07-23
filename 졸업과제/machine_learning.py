@@ -110,6 +110,15 @@ def BaggingKNeighborsClassifier(A_X_train, A_Y_train, B_X_train, B_Y_train):
 
     return A_clf, B_clf
 
+def BaggingRandomForestClassifier(A_X_train, A_Y_train, B_X_train, B_Y_train):
+    estimator = RandomForestClassifier(n_estimators=100, criterion="entropy")
+    A_clf = BaggingClassifier(base_estimator=estimator, n_estimators=100, max_samples=1./10, n_jobs=1)
+    A_clf = A_clf.fit(A_X_train, A_Y_train)
+    B_clf = BaggingClassifier(base_estimator=estimator, n_estimators=100, max_samples=1./10, n_jobs=1)
+    B_clf = B_clf.fit(B_X_train, B_Y_train)
+
+    return A_clf, B_clf
+
 def Voting(A_X_train, A_Y_train, B_X_train, B_Y_train):
     estimator_1 = LinearSVC()
     estimator_2 = KNeighborsClassifier()
@@ -143,6 +152,7 @@ if __name__ == "__main__":
     print("Gradient Boosting Classification")
     learning(GradientBoost)
     """
-
-    print("Voting")
-    learning(Voting)
+    print("BaggingRandomForestClassifier")
+    learning(BaggingRandomForestClassifier)
+    ##print("Voting")
+    ##learning(Voting)
