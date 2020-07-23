@@ -154,5 +154,3 @@ if __name__ == "__main__":
 
     """print("BaggingRandomForestClassifier")
     learning(BaggingRandomForestClassifier)
-    print("Voting")
-    learning(Voting)"""
