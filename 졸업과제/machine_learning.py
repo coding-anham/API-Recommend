@@ -102,7 +102,7 @@ def BaggingLinearsvmClassifier(A_X_train, A_Y_train, B_X_train, B_Y_train):
     return A_clf, B_clf
 
 def BaggingKNeighborsClassifier(A_X_train, A_Y_train, B_X_train, B_Y_train):
-    estimator = KNeighborsClassifier()
+    estimator = KNeighborsClassifier(n_neighbors=5)
     A_clf = BaggingClassifier(base_estimator=estimator, n_estimators=100, max_samples=1./10, n_jobs=1)
     A_clf = A_clf.fit(A_X_train, A_Y_train)
     B_clf = BaggingClassifier(base_estimator=estimator, n_estimators=100, max_samples=1./10, n_jobs=1)
@@ -146,14 +146,11 @@ if __name__ == "__main__":
     print("Naive Bayes Classification")
     learning(NaiveBayesClassifier)
     print("Bagging Linear svm Classification")
-    learning(BaggingLinearsvmClassifier)
+    learning(BaggingLinearsvmClassifier)"""
     print("Bagging KNeighbors Classifier")
     learning(BaggingKNeighborsClassifier)
-    print("Gradient Boosting Classification")
-    learning(GradientBoost)
-    """
-    print("BaggingRandomForestClassifier")
+    #print("Gradient Boosting Classification")
+    #learning(GradientBoost)
+
+    """print("BaggingRandomForestClassifier")
     learning(BaggingRandomForestClassifier)
-    ##print("Voting")
-    ##learning(Voting)
-    ##재민이변경
