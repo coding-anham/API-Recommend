@@ -151,7 +151,6 @@ if __name__ == "__main__":
     print("Random Forest Classification")
     learning(randomForests)
 
-    """
     print("SVM")
     learning(svm)
     print("Naive Bayes Classification")
@@ -160,9 +159,9 @@ if __name__ == "__main__":
     learning(BaggingLinearsvmClassifier)
     print("Bagging KNeighbors Classifier")
     learning(BaggingKNeighborsClassifier)
-    #print("Gradient Boosting Classification")
-    #learning(GradientBoost)
+    print("Gradient Boosting Classification")
+    learning(GradientBoost)
     print("BaggingRandomForestClassifier")
-    learning(BaggingRandomForestClassifier)"""
+    learning(BaggingRandomForestClassifier)
     print("Voting")
     learning(Voting)
