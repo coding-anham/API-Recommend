@@ -145,9 +145,9 @@ def Voting(A_X_train, A_Y_train, B_X_train, B_Y_train):
     BLS = BaggingClassifier(base_estimator=estimator_1, n_estimators=100, max_samples=1./10, n_jobs=1)
     BKN = BaggingClassifier(base_estimator=estimator_2, n_estimators=100, max_samples=1./10, n_jobs=1)
 
-    A_clf = VotingClassifier(estimators=[('svm', SVM), ('rfc', RFC), ('nbc', NBC), ('gbc', GBC)], voting='hard')
+    A_clf = VotingClassifier(estimators=[('svm', SVM), ('rfc', RFC), ('nbc', NBC), ('gbc', GBC), ('bls', BLS), ('bkn', BKN)], voting='hard', weights=[0.75, 0.74, 0.42, 0.68, 0.75, 0.75])
     A_clf = A_clf.fit(A_X_train, A_Y_train)
-    B_clf = VotingClassifier(estimators=[('svm', SVM), ('rfc', RFC), ('nbc', NBC), ('gbc', GBC)], voting='hard')
+    B_clf = VotingClassifier(estimators=[('svm', SVM), ('rfc', RFC), ('nbc', NBC), ('gbc', GBC), ('bls', BLS), ('bkn', BKN)], voting='hard', weights=[0.78, 0.91, 0.69, 0.83, 0.70, 0.53])
     B_clf = B_clf.fit(B_X_train, B_Y_train)
 
     return A_clf, B_clf
