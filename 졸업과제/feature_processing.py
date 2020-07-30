@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 from hyperparams import *
 from rawdata_preprocessing import read_RPI_pairSeq, read_NPInter_pairSeq, read_API_pairSeq, read_randAPI_pairSeq
 from copy import deepcopy
@@ -276,5 +275,3 @@ if __name__ == "__main__":
     for i in range(10):
         preprocess_and_savez_randAPI(i)
     preprocess_and_savez_protein()
-
-
