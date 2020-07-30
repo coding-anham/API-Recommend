@@ -28,8 +28,8 @@ NPZ_PATH = {
         7   : "npz/random_apt7.npz",
         8   : "npz/random_apt8.npz",
         9   : "npz/random_apt9.npz"
-    }
-
+    },
+    "protein" : "npz/protein.npz"
 }
 
 PAIRS_PATH = {
