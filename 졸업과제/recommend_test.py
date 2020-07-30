@@ -2,8 +2,8 @@ import pickle
 from hyperparams import *
 import numpy as np
 
-RFC_A = pickle.load(open(PIC_PATH["Voting"]["A"], 'rb'))
-RFC_B = pickle.load(open(PIC_PATH["Voting"]["B"], 'rb'))
+RFC_A = pickle.load(open(PIC_PATH["mix_randomForests"]["A"], 'rb'))
+RFC_B = pickle.load(open(PIC_PATH["mix_randomForests"]["B"], 'rb'))
 
 
 for i in range(10):

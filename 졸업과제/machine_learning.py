@@ -104,7 +104,7 @@ def learning(func):
     print("BA: {}".format(BA_scores))
     print("mean AA: {}, AB: {}, BB: {}, BA: {}".format(np.mean(AA_scores), np.mean(AB_scores),np.mean(BB_scores),np.mean(BA_scores)))
 
-    #saveClf(func,A_clf,B_clf)
+    saveClf(func,A_clf,B_clf)
 
 def learning_mix(func):
     X_train, Y_train = trainset_mix()
@@ -116,7 +116,7 @@ def learning_mix(func):
     print("AA: {}".format(AA_scores))
     print("mean AA: {}".format(np.mean(AA_scores)))
 
-    #saveClf(func,A_clf,B_clf)
+    mix_saveClf(func,A_clf)
 
 def saveClf(func, A_clf, B_clf):
     label = func.__name__
@@ -124,6 +124,11 @@ def saveClf(func, A_clf, B_clf):
     filename_B = PIC_PATH[label]["B"]
     pickle.dump(A_clf, open(filename_A, 'wb'))
     pickle.dump(B_clf, open(filename_B, 'wb'))
+
+def mix_saveClf(func, A_clf):
+    label = func.__name__
+    filename_A = PIC_PATH[label]
+    pickle.dump(A_clf, open(filename_A, 'wb'))
 
 def svm(A_X_train, A_Y_train, B_X_train, B_Y_train):
     A_clf = SVC()
@@ -223,10 +228,10 @@ if __name__ == "__main__":
     learning(BaggingKNeighborsClassifier)
     print("Gradient Boosting Classification")
     learning(GradientBoost)
+    """
     print("BaggingRandomForestClassifier")
     learning(BaggingRandomForestClassifier)
     print("Voting")
     learning(Voting)
-    """
     print("mix_randomForests")
     learning_mix(mix_randomForests)

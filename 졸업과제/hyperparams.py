@@ -91,10 +91,8 @@ PIC_PATH = {
         "A": CLF_PATH + "randomForests_A.pickle",
         "B": CLF_PATH + "randomForests_B.pickle"
     },
-    "mix_randomForests": {
-        "A": CLF_PATH + "mix_randomForests_A.pickle",
-        "B": CLF_PATH + "mix_randomForests_B.pickle"
-    },
+    "mix_randomForests": CLF_PATH + "mix_randomForests_A.pickle"
+    ,
     "svm": {
         "A": CLF_PATH + "svm_A.pickle",
         "B": CLF_PATH + "svm_B.pickle"
