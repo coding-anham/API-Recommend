@@ -262,18 +262,17 @@ def preprocess_and_savez_protein():
 
 if __name__ == "__main__":
     print("Feature Preprocessing")
-
-    """preprocess_and_savez_NPInter()
+    """
+    preprocess_and_savez_NPInter()
     preprocess_and_savez_RPI(1807)
     preprocess_and_savez_RPI(2241)
     preprocess_and_savez_RPI(369)
     preprocess_and_savez_RPI(488)
-    """
     preprocess_and_savez_API("A_train")
     preprocess_and_savez_API("A_test")
     preprocess_and_savez_API("B_train")
     preprocess_and_savez_API("B_test")
-
+    """
     for i in range(10):
         preprocess_and_savez_randAPI(i)
     preprocess_and_savez_protein()
