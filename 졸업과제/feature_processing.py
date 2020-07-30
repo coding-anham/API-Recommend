@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 from hyperparams import *
-from rawdata_preprocessing import read_RPI_pairSeq, read_NPInter_pairSeq, read_API_pairSeq
+from rawdata_preprocessing import read_RPI_pairSeq, read_NPInter_pairSeq, read_API_pairSeq, read_randAPI_pairSeq
 from copy import deepcopy
 import numpy as np
 
@@ -155,17 +155,26 @@ def preprocess_and_savez_API(label):
     X, Y = read_API_pairSeq(label)
     XP, XA, Y = preprocess_feature(X, Y, NPZ_PATH["API"][label])
 
+def preprocess_and_savez_randAPI(label):
+    X = read_randAPI_pairSeq(label)
+    Y = []
+    XP, XA, Y = preprocess_feature(X, Y, NPZ_PATH["rand"][label])
+
+
 if __name__ == "__main__":
     print("Feature Preprocessing")
-    #preprocess_and_savez_NPInter()
-    #preprocess_and_savez_RPI(1807)
-    #preprocess_and_savez_RPI(2241)
-    #preprocess_and_savez_RPI(369)
-    #preprocess_and_savez_RPI(488)
+    """
+    preprocess_and_savez_NPInter()
+    preprocess_and_savez_RPI(1807)
+    preprocess_and_savez_RPI(2241)
+    preprocess_and_savez_RPI(369)
+    preprocess_and_savez_RPI(488)
     preprocess_and_savez_API("A_train")
     preprocess_and_savez_API("A_test")
     preprocess_and_savez_API("B_train")
     preprocess_and_savez_API("B_test")
-
+    """
+    for i in range(10):
+        preprocess_and_savez_randAPI(i)
 
 

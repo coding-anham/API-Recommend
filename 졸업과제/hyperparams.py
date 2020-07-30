@@ -16,6 +16,18 @@ NPZ_PATH = {
         "B_train"   : "npz/API_B_train.npz",
         "A_test"    : "npz/API_A_test.npz",
         "B_test"    : "npz/API_B_test.npz"
+    },
+    "rand"  : {
+        0   : "npz/random_apt0.npz",
+        1   : "npz/random_apt1.npz",
+        2   : "npz/random_apt2.npz",
+        3   : "npz/random_apt3.npz",
+        4   : "npz/random_apt4.npz",
+        5   : "npz/random_apt5.npz",
+        6   : "npz/random_apt6.npz",
+        7   : "npz/random_apt7.npz",
+        8   : "npz/random_apt8.npz",
+        9   : "npz/random_apt9.npz"
     }
 
 }
@@ -33,6 +45,18 @@ PAIRS_PATH = {
         "B_train"   : BASE_PATH + "benchmark_B_train_sequences.csv",
         "A_test"    : BASE_PATH + "benchmark_A_test_sequences.csv",
         "B_test"    : BASE_PATH + "benchmark_B_test_sequences.csv"
+    },
+    "rand"  : {
+        0   : BASE_PATH + "random_apt0.csv",
+        1   : BASE_PATH + "random_apt1.csv",
+        2   : BASE_PATH + "random_apt2.csv",
+        3   : BASE_PATH + "random_apt3.csv",
+        4   : BASE_PATH + "random_apt4.csv",
+        5   : BASE_PATH + "random_apt5.csv",
+        6   : BASE_PATH + "random_apt6.csv",
+        7   : BASE_PATH + "random_apt7.csv",
+        8   : BASE_PATH + "random_apt8.csv",
+        9   : BASE_PATH + "random_apt9.csv"
     }
 }
 
