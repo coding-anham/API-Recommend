@@ -105,7 +105,7 @@ def read_randAPI_pairSeq(label):
     f = open(pair_path,'r')
     rdr = csv.reader(f)
     for line in rdr:
-        X.append(["", line[1]])
+        X.append(line[1])
     f.close()
 
     return X
