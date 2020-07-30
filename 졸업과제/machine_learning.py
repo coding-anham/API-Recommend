@@ -228,10 +228,10 @@ if __name__ == "__main__":
     learning(BaggingKNeighborsClassifier)
     print("Gradient Boosting Classification")
     learning(GradientBoost)
-    """
     print("BaggingRandomForestClassifier")
     learning(BaggingRandomForestClassifier)
     print("Voting")
     learning(Voting)
+    """
     print("mix_randomForests")
     learning_mix(mix_randomForests)
