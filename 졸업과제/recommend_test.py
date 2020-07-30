@@ -18,5 +18,6 @@ for i in range(10):
     pdA = RFC_A.predict(Train)
     pdB = RFC_B.predict(Train)
 
-    print("A {}".format(pdA))
-    print("B {}".format(pdB))
+    #print("A {}".format(pdA))
+    #print("B {}".format(pdB))
+#test
