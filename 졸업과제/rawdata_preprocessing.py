@@ -99,6 +99,18 @@ def read_API_pairSeq(label):
 
     return X, Y
 
+def read_randAPI_pairSeq(label):
+    X = []
+    pair_path = PAIRS_PATH["rand"][label]
+    f = open(pair_path,'r')
+    rdr = csv.reader(f)
+    for line in rdr:
+        X.append(["", line[1]])
+    f.close()
+
+    return X
+
+
 if __name__ == "__main__":
     # Example
     read_RPI_pairSeq(369)
