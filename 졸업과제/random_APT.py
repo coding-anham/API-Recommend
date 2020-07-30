@@ -1,4 +1,5 @@
 import random
+from hyperparams import *
 
 APT_pool = "ACGU"
 
@@ -9,9 +10,8 @@ for j in range(100):
         result += random.choice(APT_pool)
     results.append(result)
     result = ""
-
-f = open('data/random_apt8.csv', 'w')
-for i in range(100):
-    f.write(str(i) + ',' + results[i] + '\n')
-
-f.close()
+for i in range(10):
+    f = open(PAIRS_PATH["rand"][i], 'w')
+    for j in range(100):
+        f.write(str(j) + ',' + results[j] + '\n')
+    f.close()
