@@ -60,9 +60,9 @@ def evaluation():
             if ss[i] == ".":
                 base += 1
         if base>11 :
-            #scores += (base-11)
-            #scores += 1
-            scores += (base-11)/2.0
+            #scores[i] += (base-11)
+            scores[i] += 1
+            #scores[i] += (base-11)/2.0
 
 def selection():
     global chromosomes, scores, new_chroms
