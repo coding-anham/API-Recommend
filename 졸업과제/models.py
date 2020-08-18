@@ -23,7 +23,7 @@ def makeCh():
     chromosomes = []
     # length - 10 , 10000 seq
     for i in range(10000):
-        for j in range(27):
+        for j in range(15):
             seq += random.choice(APT_pool)
         chromosomes.append(seq)
         seq = ""
