@@ -110,6 +110,16 @@ def read_randAPI_pairSeq(label):
 
     return X
 
+def read_genAPI_pairSeq():
+    X = []
+    pair_path = PAIRS_PATH["genetic"]
+    f = open(pair_path,'r')
+    rdr = csv.reader(f)
+    for line in rdr:
+        X.append(line[1])
+    f.close()
+
+    return X
 
 if __name__ == "__main__":
     # Example

@@ -29,9 +29,7 @@ NPZ_PATH = {
         8   : "npz/random_apt8.npz",
         9   : "npz/random_apt9.npz"
     },
-    "genetic"   : {
-        "npz/genetic_apt.npz"
-    },
+    "genetic"   : "npz/genetic_apt.npz",
     "protein" : "npz/protein.npz",
     "mix"   : "npz/mix.npz"
 }
@@ -62,9 +60,7 @@ PAIRS_PATH = {
         8   : BASE_PATH + "random_apt8.csv",
         9   : BASE_PATH + "random_apt9.csv"
     },
-    "genetic"   : {
-        BASE_PATH + "genetic_apt.csv"
-    }
+    "genetic"   : BASE_PATH + "genetic_apt.csv"
 }
 
 SEQ_PATH = {
