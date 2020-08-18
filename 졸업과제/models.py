@@ -1,7 +1,6 @@
 import RNA
 import random
 import numpy as np
-import pickle
 from hyperparams import *
 
 """
@@ -61,8 +60,8 @@ def evaluation():
                 base += 1
         if base>11 :
             #scores[i] += (base-11)
-            scores[i] += 1
             #scores[i] += (base-11)/2.0
+            scores[i] += 1
 
 def selection():
     global chromosomes, scores, new_chroms
