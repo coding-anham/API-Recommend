@@ -14,6 +14,7 @@ for i in range(10):
 chromosomes = []
 new_chroms = []
 scores = np.zeros(10000)
+generation = 0
 
 def makeCh():
     global  chromosomes
@@ -27,7 +28,7 @@ def makeCh():
         chromosomes.append(seq)
         seq = ""
 
-def eval():
+def evaluation():
     global chromosomes, scores
     scores = np.zeros(10000)
 
@@ -74,7 +75,7 @@ def selection():
         max -= 1
 
 def crossover():
-    global chromosomes, scores, new_chroms
+    global new_chroms
     parent1 = new_chroms[:50]
     parent2 = new_chroms[50:]
 
@@ -86,10 +87,40 @@ def crossover():
         new_chroms.append(child1)
         new_chroms.append(child2)
 
+def mutation():
+    global new_chroms
+
+    APT_pool = "ACGU"
+
+    for i in range(4):
+        chroms = new_chroms[:200]
+        str_len = len(chroms[0])
+        for j in range(200):
+            for k in range(str_len):
+                b = random.randint(0,3) # 25% mutaion
+                if b==3 :
+                    chroms[j][k] = random.choice(APT_pool)
+        new_chroms.append(chroms)
+
+def update():
+    global chromosomes, new_chroms, generation
+
+    chromosomes = new_chroms[:]
+    generation += 1
 
 def main():
     global chromosomes
     makeCh()
+
+    for i in range(30):
+        evaluation()
+        selection()
+        crossover()
+        mutation()
+        update()
+
+    for i in range(1000):
+        print(chromosomes[i])
 
 if __name__ == '__main__':
     main()
