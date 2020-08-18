@@ -8,14 +8,14 @@ new_chroms = []
 scores = np.zeros(100000)
 generation = 0
 
-def makeCh(len):
+def makeCh(str_len):
     global  chromosomes
     APT_pool = "ACGU"
     seq = ""
     chromosomes = []
     # length - 10 , 10000 seq
     for i in range(100000):
-        for j in range(len):
+        for j in range(str_len):
             seq += random.choice(APT_pool)
         chromosomes.append(seq)
         seq = ""
@@ -104,10 +104,10 @@ def update():
     chromosomes = new_chroms[:]
     generation += 1
 
-def genetic(len):
+def genetic(apt_len):
     global chromosomes
-    makeCh(len)
-    print("Phase: " + str(len))
+    makeCh(apt_len)
+    print("Phase: " + str(apt_len))
     for i in range(30):
         evaluation()
         selection()
@@ -117,24 +117,32 @@ def genetic(len):
 
     print(len(chromosomes))
 
-
 def main():
     global chromosomes
 
-    for i in range(10,15):
-        len = i
-        genetic(len)
+    apt_len = 10
+    genetic(apt_len)
 
-        f = open(PAIRS_PATH["genetic"][len], 'w')
+    f = open(PAIRS_PATH["genetic"][apt_len], 'w')
+    for j in range(len(chromosomes)):
+        f.write(str(j) + ',' + chromosomes[j] + '\n')
+    f.close()
+
+    """
+    for i in range(10,15):
+        apt_len = i
+        genetic(apt_len)
+
+        f = open(PAIRS_PATH["genetic"][apt_len], 'w')
         for j in range(len(chromosomes)):
             f.write(str(j) + ',' + chromosomes[j] + '\n')
         f.close()
-    """
+        
     for i in range(15,20):
-        len = i
-        genetic(len)
+        apt_len = i
+        genetic(apt_len)
     
-        f = open(PAIRS_PATH["genetic"][len], 'w')
+        f = open(PAIRS_PATH["genetic"][apt_len], 'w')
         for j in range(len(chromosomes)):
             f.write(str(j) + ',' + chromosomes[j] + '\n')
         f.close()
