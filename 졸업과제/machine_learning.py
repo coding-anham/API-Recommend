@@ -215,7 +215,7 @@ def Voting(A_X_train, A_Y_train, B_X_train, B_Y_train):
     return A_clf, B_clf
 
 if __name__ == "__main__":
-    """""
+    """"""
     print("Random Forest Classification")
     learning(randomForests)
     print("SVM")
@@ -232,6 +232,6 @@ if __name__ == "__main__":
     learning(BaggingRandomForestClassifier)
     print("Voting")
     learning(Voting)
-    """
+    """"""
     print("mix_randomForests")
     learning_mix(mix_randomForests)
