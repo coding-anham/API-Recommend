@@ -51,7 +51,7 @@ def evaluation():
             base = 0
             if ss[i] == ".":
                 base += 1
-        if base>11 :
+        if base>=11 :
             #scores[i] += (base-11)
             #scores[i] += (base-11)/2.0
             scores[i] += 1
@@ -120,14 +120,6 @@ def genetic(apt_len):
 def main():
     global chromosomes
 
-    apt_len = 10
-    genetic(apt_len)
-
-    f = open(PAIRS_PATH["genetic"][apt_len], 'w')
-    for j in range(len(chromosomes)):
-        f.write(str(j) + ',' + chromosomes[j] + '\n')
-    f.close()
-
     """
     for i in range(10,15):
         apt_len = i
@@ -137,7 +129,8 @@ def main():
         for j in range(len(chromosomes)):
             f.write(str(j) + ',' + chromosomes[j] + '\n')
         f.close()
-        
+
+    """
     for i in range(15,20):
         apt_len = i
         genetic(apt_len)
@@ -146,7 +139,6 @@ def main():
         for j in range(len(chromosomes)):
             f.write(str(j) + ',' + chromosomes[j] + '\n')
         f.close()
-    """
 
 if __name__ == '__main__':
     main()
