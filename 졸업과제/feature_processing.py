@@ -260,9 +260,9 @@ def preprocess_and_savez_protein():
         X.append(protein)
     XP = preprocess_feature_protein(X, NPZ_PATH["protein"])
 
-def preprocess_and_savez_genAPI():
-    X = read_genAPI_pairSeq()
-    XA = preprocess_feature_APT(X, NPZ_PATH["genetic"])
+def preprocess_and_savez_genAPI(label):
+    X = read_genAPI_pairSeq(label)
+    XA = preprocess_feature_APT(X, NPZ_PATH["genetic"][label])
 
 if __name__ == "__main__":
     print("Feature Preprocessing")
@@ -281,4 +281,5 @@ if __name__ == "__main__":
         preprocess_and_savez_randAPI(i)
     """
     preprocess_and_savez_protein()
-    preprocess_and_savez_genAPI()
+    for i in range(10):
+        preprocess_and_savez_genAPI(i)
