@@ -30,16 +30,16 @@ NPZ_PATH = {
         9   : "npz/random_apt9.npz"
     },
     "genetic"   : {
-        0   : BASE_PATH + "genetic_apt0.npz",
-        1   : BASE_PATH + "genetic_apt1.npz",
-        2   : BASE_PATH + "genetic_apt2.npz",
-        3   : BASE_PATH + "genetic_apt3.npz",
-        4   : BASE_PATH + "genetic_apt4.npz",
-        5   : BASE_PATH + "genetic_apt5.npz",
-        6   : BASE_PATH + "genetic_apt6.npz",
-        7   : BASE_PATH + "genetic_apt7.npz",
-        8   : BASE_PATH + "genetic_apt8.npz",
-        9   : BASE_PATH + "genetic_apt9.npz"
+        0   : "npz/genetic_apt0.npz",
+        1   : "npz/genetic_apt1.npz",
+        2   : "npz/genetic_apt2.npz",
+        3   : "npz/genetic_apt3.npz",
+        4   : "npz/genetic_apt4.npz",
+        5   : "npz/genetic_apt5.npz",
+        6   : "npz/genetic_apt6.npz",
+        7   : "npz/genetic_apt7.npz",
+        8   : "npz/genetic_apt8.npz",
+        9   : "npz/genetic_apt9.npz"
     },
     "protein" : "npz/protein.npz",
     "mix"   : "npz/mix.npz"
