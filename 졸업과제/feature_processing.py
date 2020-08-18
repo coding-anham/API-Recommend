@@ -196,7 +196,6 @@ def preprocess_feature_protein(x, npz_path):
     p_CTF = improvedCTF(letters=["A","B","C","D","E","F","G"],length=p_mer)
 
     x_protein = []
-    x_rna = []
 
     for idx, pseq in enumerate(x):
         p_feature_dict = p_CTF.get_feature_dict()
@@ -256,7 +255,7 @@ def preprocess_and_savez_randAPI(label):
 def preprocess_and_savez_protein():
     protein = "QELLCAASLISDRWVLTAAHCLLYPPWDKNFTVNDILVRIGKYARSRYERNMEKISTLEKIIIHPGYNWRENLDRDIALMKLKKPVAFSDYIHPVCLPDKQIVTSLLQAGHKGRVTGWGNLKEMWTVNMNEVQPSVLQMVNLPLVERPICKASTGIRVTDNMFCAGYKPEEGKRGDACEGDSGGPFVMKNPYNNRWYQMGIVSWGEGCDRDGKYGFYTHVFRLKKWIRKMVDRFG"
     X = []
-    for i in range(1000):
+    for i in range(100000):
         X.append(protein)
     XP = preprocess_feature_protein(X, NPZ_PATH["protein"])
 
@@ -281,5 +280,5 @@ if __name__ == "__main__":
         preprocess_and_savez_randAPI(i)
     """
     preprocess_and_savez_protein()
-    for i in range(10):
+    for i in range(10,20):
         preprocess_and_savez_genAPI(i)

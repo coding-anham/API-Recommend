@@ -3,35 +3,28 @@ import random
 import numpy as np
 from hyperparams import *
 
-"""
-for i in range(10):
-    f = open(PAIRS_PATH["rand"][i], 'w')
-    for j in range(1000):
-        f.write(str(j) + ',' + results[j] + '\n')
-    f.close()
-"""
 chromosomes = []
 new_chroms = []
-scores = np.zeros(10000)
+scores = np.zeros(100000)
 generation = 0
 
-def makeCh():
+def makeCh(len):
     global  chromosomes
     APT_pool = "ACGU"
     seq = ""
     chromosomes = []
     # length - 10 , 10000 seq
-    for i in range(10000):
-        for j in range(15):
+    for i in range(100000):
+        for j in range(len):
             seq += random.choice(APT_pool)
         chromosomes.append(seq)
         seq = ""
 
 def evaluation():
     global chromosomes, scores
-    scores = np.zeros(10000)
+    scores = np.zeros(100000)
 
-    for i in range(10000):
+    for i in range(100000):
         seq = str(chromosomes[i])
         str_len = len(seq)
         (ss, mfe) = RNA.fold(seq)
@@ -68,21 +61,21 @@ def selection():
     new_chroms = []
     selected = 0
     max = np.max(scores)
-    while(selected != 1000):
-        for i in range(10000):
-            if scores[i] == max and selected<1000:
+    while(selected != 10000):
+        for i in range(100000):
+            if scores[i] == max and selected<10000:
                 new_chroms.append(chromosomes[i])
                 selected += 1
         max -= 1
 
 def crossover():
     global new_chroms
-    parent1 = new_chroms[:500]
-    parent2 = new_chroms[500:]
+    parent1 = new_chroms[:5000]
+    parent2 = new_chroms[5000:]
 
     str_len = len(parent1[0])
 
-    for i in range(500):
+    for i in range(5000):
         child1 = parent1[i][:int(str_len/2)] + parent2[i][int(str_len/2):]
         child2 = parent2[i][:int(str_len/2)] + parent1[i][int(str_len/2):]
         new_chroms.append(child1)
@@ -94,15 +87,15 @@ def mutation():
     APT_pool = "ACGU"
 
     for i in range(4):
-        chroms = new_chroms[:2000]
+        chroms = new_chroms[:20000]
         str_len = len(chroms[0])
-        for j in range(2000):
+        for j in range(20000):
             for k in range(str_len):
                 b = random.randint(0,3) # 25% mutaion
                 if b==3 :
                     mutated = str(chroms[j][:k]) + str(random.choice(APT_pool)) + str(chroms[j][k+1:])
                     chroms[j] = mutated
-        for j in range(2000):
+        for j in range(20000):
             new_chroms.append(chroms[j])
 
 def update():
@@ -111,26 +104,41 @@ def update():
     chromosomes = new_chroms[:]
     generation += 1
 
+def genetic(len):
+    global chromosomes
+    makeCh(len)
+    print("Phase: " + str(len))
+    for i in range(30):
+        evaluation()
+        selection()
+        crossover()
+        mutation()
+        update()
+
+    print(len(chromosomes))
+
+
 def main():
     global chromosomes
-    makeCh()
-    for x in range(10):
-        print("Phase: " + str(x))
-        for i in range(30):
-            #print("generation: " + str(generation))
-            evaluation()
-            selection()
-            crossover()
-            mutation()
-            update()
 
-        print(len(chromosomes))
+    for i in range(10,15):
+        len = i
+        genetic(len)
 
-        f = open(PAIRS_PATH["genetic"][x], 'w')
+        f = open(PAIRS_PATH["genetic"][len], 'w')
         for j in range(len(chromosomes)):
             f.write(str(j) + ',' + chromosomes[j] + '\n')
         f.close()
-
+    """
+    for i in range(15,20):
+        len = i
+        genetic(len)
+    
+        f = open(PAIRS_PATH["genetic"][len], 'w')
+        for j in range(len(chromosomes)):
+            f.write(str(j) + ',' + chromosomes[j] + '\n')
+        f.close()
+    """
 
 if __name__ == '__main__':
     main()
