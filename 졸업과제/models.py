@@ -1,6 +1,7 @@
 import RNA
 import random
 import numpy as np
+import pickle
 from hyperparams import *
 
 """
@@ -13,7 +14,7 @@ for i in range(10):
 
 chromosomes = []
 new_chroms = []
-scores = np.zeros(10000)
+scores = np.zeros(1000)
 generation = 0
 
 def makeCh():
@@ -22,18 +23,19 @@ def makeCh():
     seq = ""
     chromosomes = []
     # length - 10 , 10000 seq
-    for i in range(10000):
-        for j in range(10):
+    for i in range(1000):
+        for j in range(27):
             seq += random.choice(APT_pool)
         chromosomes.append(seq)
         seq = ""
 
 def evaluation():
     global chromosomes, scores
-    scores = np.zeros(10000)
+    scores = np.zeros(1000)
 
-    for i in range(10000):
-        seq = chromosomes[i]
+    for i in range(1000):
+        seq = str(chromosomes[i])
+        str_len = len(seq)
         (ss, mfe) = RNA.fold(seq)
         # cond#1 3 consecutive base pairs
         if ss[0] == ".":
@@ -54,7 +56,7 @@ def evaluation():
             scores[i] += 1
 
         # cond#3 11 unpaired base
-        for i in range(27):
+        for i in range(str_len):
             base = 0
             if ss[i] == ".":
                 base += 1
@@ -82,8 +84,8 @@ def crossover():
     str_len = len(parent1[0])
 
     for i in range(50):
-        child1 = parent1[:str_len/2] + parent2[str_len/2:]
-        child2 = parent2[:str_len/2] + parent1[str_len/2:]
+        child1 = parent1[i][:int(str_len/2)] + parent2[i][int(str_len/2):]
+        child2 = parent2[i][:int(str_len/2)] + parent1[i][int(str_len/2):]
         new_chroms.append(child1)
         new_chroms.append(child2)
 
@@ -99,8 +101,10 @@ def mutation():
             for k in range(str_len):
                 b = random.randint(0,3) # 25% mutaion
                 if b==3 :
-                    chroms[j][k] = random.choice(APT_pool)
-        new_chroms.append(chroms)
+                    mutated = str(chroms[j][:k]) + str(random.choice(APT_pool)) + str(chroms[j][k+1:])
+                    chroms[j] = mutated
+        for j in range(200):
+            new_chroms.append(chroms[j])
 
 def update():
     global chromosomes, new_chroms, generation
@@ -119,8 +123,13 @@ def main():
         mutation()
         update()
 
-    for i in range(1000):
+    for i in range(len(chromosomes)):
         print(chromosomes[i])
+
+    f = open(BASE_PATH + "genetic", 'w')
+    for j in range(1000):
+        f.write(str(j) + ',' + chromosomes[j] + '\n')
+    f.close()
 
 if __name__ == '__main__':
     main()
