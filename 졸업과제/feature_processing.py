@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 from hyperparams import *
-from rawdata_preprocessing import read_RPI_pairSeq, read_NPInter_pairSeq, read_API_pairSeq, read_randAPI_pairSeq
+from rawdata_preprocessing import read_RPI_pairSeq, read_NPInter_pairSeq, read_API_pairSeq, read_randAPI_pairSeq, read_genAPI_pairSeq
 from copy import deepcopy
 import numpy as np
 
@@ -260,6 +260,10 @@ def preprocess_and_savez_protein():
         X.append(protein)
     XP = preprocess_feature_protein(X, NPZ_PATH["protein"])
 
+def preprocess_and_savez_genAPI():
+    X = read_genAPI_pairSeq()
+    XA = preprocess_feature_APT(X, NPZ_PATH["genetic"])
+
 if __name__ == "__main__":
     print("Feature Preprocessing")
 
@@ -268,7 +272,6 @@ if __name__ == "__main__":
     preprocess_and_savez_RPI(2241)
     preprocess_and_savez_RPI(369)
     preprocess_and_savez_RPI(488)
-    """
     preprocess_and_savez_API("A_train")
     preprocess_and_savez_API("A_test")
     preprocess_and_savez_API("B_train")
@@ -276,4 +279,6 @@ if __name__ == "__main__":
 
     for i in range(10):
         preprocess_and_savez_randAPI(i)
+    """
     preprocess_and_savez_protein()
+    preprocess_and_savez_genAPI()
