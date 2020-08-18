@@ -128,7 +128,7 @@ def main():
         print(len(chromosomes))
 
         f = open(PAIRS_PATH["genetic"][x], 'w')
-        for j in range(chromosomes):
+        for j in range(len(chromosomes)):
             f.write(str(j) + ',' + chromosomes[j] + '\n')
         f.close()
 
