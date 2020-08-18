@@ -29,7 +29,18 @@ NPZ_PATH = {
         8   : "npz/random_apt8.npz",
         9   : "npz/random_apt9.npz"
     },
-    "genetic"   : "npz/genetic_apt.npz",
+    "genetic"   : {
+        0   : BASE_PATH + "genetic_apt0.npz",
+        1   : BASE_PATH + "genetic_apt1.npz",
+        2   : BASE_PATH + "genetic_apt2.npz",
+        3   : BASE_PATH + "genetic_apt3.npz",
+        4   : BASE_PATH + "genetic_apt4.npz",
+        5   : BASE_PATH + "genetic_apt5.npz",
+        6   : BASE_PATH + "genetic_apt6.npz",
+        7   : BASE_PATH + "genetic_apt7.npz",
+        8   : BASE_PATH + "genetic_apt8.npz",
+        9   : BASE_PATH + "genetic_apt9.npz"
+    },
     "protein" : "npz/protein.npz",
     "mix"   : "npz/mix.npz"
 }
@@ -60,7 +71,18 @@ PAIRS_PATH = {
         8   : BASE_PATH + "random_apt8.csv",
         9   : BASE_PATH + "random_apt9.csv"
     },
-    "genetic"   : BASE_PATH + "genetic_apt.csv"
+    "genetic"   : {
+        0   : BASE_PATH + "genetic_apt0.csv",
+        1   : BASE_PATH + "genetic_apt1.csv",
+        2   : BASE_PATH + "genetic_apt2.csv",
+        3   : BASE_PATH + "genetic_apt3.csv",
+        4   : BASE_PATH + "genetic_apt4.csv",
+        5   : BASE_PATH + "genetic_apt5.csv",
+        6   : BASE_PATH + "genetic_apt6.csv",
+        7   : BASE_PATH + "genetic_apt7.csv",
+        8   : BASE_PATH + "genetic_apt8.csv",
+        9   : BASE_PATH + "genetic_apt9.csv"
+    }
 }
 
 SEQ_PATH = {
