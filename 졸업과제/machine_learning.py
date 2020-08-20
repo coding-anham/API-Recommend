@@ -98,11 +98,11 @@ def learning(func):
     BB_scores = cross_val_score(B_clf, B_X_test, B_Y_test, cv=10)
     BA_scores = cross_val_score(B_clf, A_X_test, A_Y_test, cv=10)
 
-    print("AA: {}".format(AA_scores))
-    print("AB: {}".format(AB_scores))
-    print("BB: {}".format(BB_scores))
-    print("BA: {}".format(BA_scores))
-    print("mean AA: {}, AB: {}, BB: {}, BA: {}".format(np.mean(AA_scores), np.mean(AB_scores),np.mean(BB_scores),np.mean(BA_scores)))
+    #print("AA: {}".format(AA_scores))
+    #print("AB: {}".format(AB_scores))
+    #print("BB: {}".format(BB_scores))
+    #print("BA: {}".format(BA_scores))
+    print("mean AA: {}, AB: {}, BB: {}, BA: {}\n".format(np.mean(AA_scores), np.mean(AB_scores),np.mean(BB_scores),np.mean(BA_scores)))
 
     saveClf(func,A_clf,B_clf)
 
@@ -210,6 +210,7 @@ def Voting(A_X_train, A_Y_train, B_X_train, B_Y_train):
     A_clf = VotingClassifier(estimators=[('svm', SVM), ('rfc', RFC), ('nbc', NBC), ('gbc', GBC), ('bls', BLS), ('bkn', BKN)], voting='hard', weights=[0.75, 0.74, 0.42, 0.68, 0.75, 0.75])
     A_clf = A_clf.fit(A_X_train, A_Y_train)
     B_clf = VotingClassifier(estimators=[('svm', SVM), ('rfc', RFC), ('nbc', NBC), ('gbc', GBC), ('bls', BLS), ('bkn', BKN)], voting='hard', weights=[0.78, 0.91, 0.69, 0.83, 0.70, 0.53])
+
     B_clf = B_clf.fit(B_X_train, B_Y_train)
 
     return A_clf, B_clf
