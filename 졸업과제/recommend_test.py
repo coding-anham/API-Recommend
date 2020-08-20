@@ -4,12 +4,14 @@ from random_APT import *
 import numpy as np
 import pandas as pd
 
+imsi = []
+last = []
 def getResult():
 
     RFC_A = pickle.load(open(PIC_PATH["mix_randomForests"], 'rb'))
     positive = 0
 
-    for i in range(20,30):
+    for i in range(0,29):
         Results = []
         Train_A = np.load(NPZ_PATH["genetic"][i])
         Train_P = np.load(NPZ_PATH["protein"])
@@ -30,12 +32,57 @@ def getResult():
                 Results.append(Result)
                 positive += 1
         f.close()
-        #print(Results)
+        print(Results)
+        print(Results[0])
 
     print("positive: " + str(positive))
+    return Results
+
+def recommend100(imsi):
+    genetic_apt_arr = getResult()
+    print(len(genetic_apt_arr))
+    scores = np.zeros(len(genetic_apt_arr))
+    for i in range(len(genetic_apt_arr)):
+        str_len = len(genetic_apt_arr[i])
+        (ss, mfe) = RNA.fold(genetic_apt_arr[i])
+        # cond#1 3 consecutive base pairs
+        if ss[0] == ".":
+            if ss[1] == "(" and ss[2] == "(" and ss[3] == "(":
+                if ss[-1] == "." and ss[-2] == ")" and ss[-3] == ")" and ss[-4] == ")":
+                    scores[i] += 1
+                if ss[-1] == ")" and ss[-2] == ")" and ss[-3] == ")":
+                    scores[i] += 1
+        if ss[0] == "(":
+            if ss[1] == "(" and ss[2] == "(":
+                if ss[-1] == "." and ss[-2] == ")" and ss[-3] == ")" and ss[-4] == ")":
+                    scores[i] += 1
+                if ss[-1] == ")" and ss[-2] == ")" and ss[-3] == ")":
+                    scores[i] += 1
+
+        # cond#2 free Energy <= -5.7
+        if mfe <= -5.7:
+            scores[i] += 1
+
+        # cond#3 11 unpaired base
+        for i in range(str_len):
+            base = 0
+            if ss[i] == ".":
+                base += 1
+        if base >= 11:
+            scores[i] += 1
+
+
+    for i in range(len(genetic_apt_arr)):
+        imsi.append((genetic_apt_arr[i], scores[i]))
+    imsi = sorted(imsi, key=lambda imsi : imsi[1], reverse=True)
+
+    for i in range(100):
+        last.append(imsi[i][0])
+    print(last)
+
 
 if __name__ == "__main__":
-    getResult()
+    recommend100(imsi)
 """
 def check(pdA: object, rand_apt) -> object:
     rst = np.where(pdA == 1)
