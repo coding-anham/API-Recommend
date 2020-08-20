@@ -54,7 +54,7 @@ def check(pdA: object, rand_apt) -> object:
             X.append(apt)
 
     return X
-    
+
 for i in range(10):
     Train_A = np.load(NPZ_PATH["rand"][i])
     Train_P = np.load(NPZ_PATH["protein"])
