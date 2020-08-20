@@ -4,9 +4,39 @@ from random_APT import *
 import numpy as np
 import pandas as pd
 
-RFC_A = pickle.load(open(PIC_PATH["mix_randomForests"], 'rb'))
-positive = 0
+def getResult():
 
+    RFC_A = pickle.load(open(PIC_PATH["mix_randomForests"], 'rb'))
+    positive = 0
+
+    for i in range(20,30):
+        Results = []
+        Train_A = np.load(NPZ_PATH["genetic"][i])
+        Train_P = np.load(NPZ_PATH["protein"])
+
+        X_A = Train_A['XA']
+        X_P = Train_P['XP']
+
+        Train = np.concatenate((X_P, X_A), axis=-1)
+        pdA = RFC_A.predict(Train)
+
+        pair_path = PAIRS_PATH["genetic"][i]
+        f = open(pair_path, 'r')
+        lines = f.readlines()
+        for j in range(100000):
+            if pdA[j]==1 :
+                target_data = lines[j].split(",")[1]
+                Result = target_data[:-1]
+                Results.append(Result)
+                positive += 1
+        f.close()
+        #print(Results)
+
+    print("positive: " + str(positive))
+
+if __name__ == "__main__":
+    getResult()
+"""
 def check(pdA: object, rand_apt) -> object:
     rst = np.where(pdA == 1)
     apt_list = ""
@@ -25,26 +55,7 @@ def check(pdA: object, rand_apt) -> object:
 
     return X
 
-
-for i in range(10):
-    Train_A = np.load(NPZ_PATH["genetic"][i+10])
-    Train_P = np.load(NPZ_PATH["protein"])
-    rand_apt = pd.read_csv(PAIRS_PATH["genetic"][i+10])
-    rand_apt_arr = rand_apt.to_numpy()
-
-    X_A = Train_A['XA']
-    X_P = Train_P['XP']
-
-    Train = np.concatenate((X_P, X_A), axis=-1)
-
-    pdA = RFC_A.predict(Train)
-
-    X = check(pdA, rand_apt_arr)
-    print(X)
-    positive += len(X)
-    #print("A {}".format(pdA))
-
-print(positive)
+"""
 """"
 for i in range(10):
     Train_A = np.load(NPZ_PATH["rand"][i])
