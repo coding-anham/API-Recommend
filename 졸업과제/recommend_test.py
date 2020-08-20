@@ -1,5 +1,6 @@
 import pickle
 from hyperparams import *
+from random_APT import *
 import numpy as np
 import pandas as pd
 
@@ -23,6 +24,7 @@ def check(pdA: object, rand_apt) -> object:
             X.append(apt)
 
     return X
+
 
 for i in range(10):
     Train_A = np.load(NPZ_PATH["genetic"][i+10])
