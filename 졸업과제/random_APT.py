@@ -3,6 +3,7 @@ from hyperparams import *
 import RNA
 
 APT_pool = "ACGU"
+imsi = []
 result = ""
 results = []
 length=27
@@ -38,13 +39,17 @@ def Number3(ss):
     return num3
 
 
-while len(results)<1000:
+while len(imsi)<10000:
     for i in range(length):
         result += random.choice(APT_pool)
     (ss, mfe) = RNA.fold(result)
     if Number1(ss)==0 and Number2(mfe)==0 and Number3(ss)>=11:
-        results.append(result)
+        imsi.append((result, mfe))
     result = ""
+
+imsi = sorted(imsi, key=lambda imsi : imsi[1])
+for i in range(1000):
+    results.append(imsi[i][0])
 
 for i in range(10):
     f = open(PAIRS_PATH["rand"][i], 'w')

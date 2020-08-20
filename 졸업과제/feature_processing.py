@@ -280,5 +280,5 @@ if __name__ == "__main__":
         preprocess_and_savez_randAPI(i)
     """
     preprocess_and_savez_protein()
-    for i in range(10,20):
+    for i in range(20,21):
         preprocess_and_savez_genAPI(i)

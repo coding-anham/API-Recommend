@@ -119,7 +119,6 @@ def genetic(apt_len):
 
 def main():
     global chromosomes
-
     """
     for i in range(10,15):
         apt_len = i
@@ -131,7 +130,7 @@ def main():
         f.close()
 
     """
-    for i in range(15,20):
+    for i in range(21,30):
         apt_len = i
         genetic(apt_len)
     
