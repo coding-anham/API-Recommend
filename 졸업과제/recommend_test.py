@@ -10,9 +10,10 @@ def getResult():
 
     RFC_A = pickle.load(open(PIC_PATH["mix_randomForests"], 'rb'))
     positive = 0
+    Results = []
 
-    for i in range(0,29):
-        Results = []
+    for i in range(10,19):
+        #Results = []
         Train_A = np.load(NPZ_PATH["genetic"][i])
         Train_P = np.load(NPZ_PATH["protein"])
 
@@ -32,15 +33,16 @@ def getResult():
                 Results.append(Result)
                 positive += 1
         f.close()
-        print(Results)
-        print(Results[0])
+
+    print(Results)
+    #print(Results[0])
 
     print("positive: " + str(positive))
     return Results
 
 def recommend100(imsi):
     genetic_apt_arr = getResult()
-    print(len(genetic_apt_arr))
+    print("len: " + str(len(genetic_apt_arr)))
     scores = np.zeros(len(genetic_apt_arr))
     for i in range(len(genetic_apt_arr)):
         str_len = len(genetic_apt_arr[i])
@@ -78,7 +80,8 @@ def recommend100(imsi):
 
     for i in range(100):
         last.append(imsi[i][0])
-    print(last)
+    for i in range(100):
+        print("Rank " + str(i) + " : " + str(last[i]))
 
 
 if __name__ == "__main__":
