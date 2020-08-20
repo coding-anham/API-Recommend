@@ -55,8 +55,6 @@ def check(pdA: object, rand_apt) -> object:
 
     return X
 
-"""
-""""
 for i in range(10):
     Train_A = np.load(NPZ_PATH["rand"][i])
     Train_P = np.load(NPZ_PATH["protein"])
@@ -67,8 +65,9 @@ for i in range(10):
     Train = np.concatenate((X_P, X_A), axis=-1)
 
     pdA = RFC_A.predict(Train)
-
     print("A {}".format(pdA))
+"""
+"""
 for j in range(100):
     for i in range(100):
         print(str(pdA[j*100+1]), end=' ')
