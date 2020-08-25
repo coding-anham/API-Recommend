@@ -225,7 +225,8 @@ def preprocess_feature_protein(x, npz_path):
         p_feature = np.array(list(p_feature_dict.values()))
         p_feature = min_max_norm(p_feature)
 
-        x_protein.append(p_feature)
+        for i in range(100000):
+            x_protein.append(p_feature)
 
     x_protein = np.array(x_protein)
     np.savez(npz_path,XP=x_protein)
@@ -255,8 +256,7 @@ def preprocess_and_savez_randAPI(label):
 def preprocess_and_savez_protein():
     protein = "QELLCAASLISDRWVLTAAHCLLYPPWDKNFTVNDILVRIGKYARSRYERNMEKISTLEKIIIHPGYNWRENLDRDIALMKLKKPVAFSDYIHPVCLPDKQIVTSLLQAGHKGRVTGWGNLKEMWTVNMNEVQPSVLQMVNLPLVERPICKASTGIRVTDNMFCAGYKPEEGKRGDACEGDSGGPFVMKNPYNNRWYQMGIVSWGEGCDRDGKYGFYTHVFRLKKWIRKMVDRFG"
     X = []
-    for i in range(100000):
-        X.append(protein)
+    X.append(protein)
     XP = preprocess_feature_protein(X, NPZ_PATH["protein"])
 
 def preprocess_and_savez_genAPI(label):
@@ -281,5 +281,7 @@ if __name__ == "__main__":
         preprocess_and_savez_randAPI(i)
     """
     preprocess_and_savez_protein()
+    """
     for i in range(20,21):
         preprocess_and_savez_genAPI(i)
+    """
