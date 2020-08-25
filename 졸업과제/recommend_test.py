@@ -1,8 +1,8 @@
 import pickle
 from hyperparams import *
-from random_APT import *
+#from random_APT import *
 import numpy as np
-import pandas as pd
+import random
 
 imsi = []
 last = []
@@ -44,6 +44,17 @@ def recommend100(imsi):
     genetic_apt_arr = getResult()
     print("len: " + str(len(genetic_apt_arr)))
     scores = np.zeros(len(genetic_apt_arr))
+
+    test = []
+    for i in range(100):
+        insert_num = random.randint(0,len(genetic_apt_arr)-1)
+        while insert_num in test:
+            insert_num = random.randint(0,len(genetic_apt_arr)-1)
+        test.append(insert_num)
+        imsi.append(genetic_apt_arr[insert_num])
+
+
+    """
     for i in range(len(genetic_apt_arr)):
         str_len = len(genetic_apt_arr[i])
         (ss, mfe) = RNA.fold(genetic_apt_arr[i])
@@ -73,15 +84,15 @@ def recommend100(imsi):
         if base >= 11:
             scores[i] += 1
 
-
     for i in range(len(genetic_apt_arr)):
         imsi.append((genetic_apt_arr[i], scores[i]))
     imsi = sorted(imsi, key=lambda imsi : imsi[1], reverse=True)
 
     for i in range(100):
         last.append(imsi[i][0])
+    """
     for i in range(100):
-        print("Rank " + str(i) + " : " + str(last[i]))
+        print("Number " + str(i) + " : " + str(imsi[i]))
 
 
 if __name__ == "__main__":
