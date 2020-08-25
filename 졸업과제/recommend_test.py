@@ -127,8 +127,7 @@ for i in range(10):
 
     pdA = RFC_A.predict(Train)
     print("A {}".format(pdA))
-"""
-"""
+    
 for j in range(100):
     for i in range(100):
         print(str(pdA[j*100+1]), end=' ')
